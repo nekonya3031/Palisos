@@ -46,6 +46,7 @@ public class Ichi {
         }
     }
     public static void pingHost(String address, int port, Cons<Host> valid, Cons<Exception> invalid){
+        System.out.println("pinged "+address);
         executor.submit(() -> {
             try{
                 DatagramSocket socket = new DatagramSocket();
