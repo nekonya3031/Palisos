@@ -19,6 +19,7 @@ public class Ichi {
     public static void main(String[] a){
         new pingableHost("easyplay.su",6567).ping();
         new pingableHost("obvilionnetwork.ru",6567).ping();
+        new pingableHost("shizashizashiza.ml",27736).ping();
         while(true){
 
         }
