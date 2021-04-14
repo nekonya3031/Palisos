@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'uwu.misaka'
+version '1.0-HENTAI'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://www.jitpack.io'
+    }
+    mavenLocal()
+}
+
+ext {
+    mindustryVersion = 'v126.2'
+}
+
+dependencies {
+    compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+}
+
+task dist (type: Jar) {
+    manifest{ attributes 'Main-Class': "uwu.misaka.Ichi" }
+    from{ configurations.compileClasspath.collect{ it.isDirectory() ? it : it.name.endsWith("pom") ? it : zipTree(it)}}
+    from files(sourceSets.main.output)
+}
