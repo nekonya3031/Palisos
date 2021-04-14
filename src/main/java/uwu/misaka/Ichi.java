@@ -17,10 +17,11 @@ public class Ichi {
     static final AsyncExecutor executor = new AsyncExecutor(Math.max(Runtime.getRuntime().availableProcessors(), 6));
     static final Prov<DatagramPacket> packetSupplier = () -> new DatagramPacket(new byte[512], 512);
     public static void main(String[] a){
-        System.out.println("START PINGING");
         new pingableHost("easyplay.su",6567).ping();
         new pingableHost("obvilionnetwork.ru",6567).ping();
-        System.out.println("END PINHING");
+        while(true){
+
+        }
     }
     public static class pingableHost{
         public String ip;
@@ -49,6 +50,7 @@ public class Ichi {
         System.out.println("pinged "+address);
         executor.submit(() -> {
             try{
+                System.out.println("Start");
                 DatagramSocket socket = new DatagramSocket();
                 long time = Time.millis();
                 socket.send(new DatagramPacket(new byte[]{-2, 1}, 2, InetAddress.getByName(address), port));
@@ -61,7 +63,9 @@ public class Ichi {
                 Host host = NetworkIO.readServerData((int)Time.timeSinceMillis(time), packet.getAddress().getHostAddress(), buffer);
 
                 Core.app.post(() -> valid.get(host));
+                System.out.println("end");
             }catch(Exception e){
+                System.out.println("err");
                 Core.app.post(() -> invalid.get(e));
             }
         });
