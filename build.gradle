@@ -10,7 +10,6 @@ repositories {
     maven {
         url 'https://www.jitpack.io'
     }
-    mavenLocal()
 }
 
 ext {
@@ -18,6 +17,7 @@ ext {
 }
 
 dependencies {
+
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
 }
