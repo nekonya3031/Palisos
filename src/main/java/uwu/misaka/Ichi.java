@@ -17,8 +17,10 @@ public class Ichi {
     static final AsyncExecutor executor = new AsyncExecutor(Math.max(Runtime.getRuntime().availableProcessors(), 6));
     static final Prov<DatagramPacket> packetSupplier = () -> new DatagramPacket(new byte[512], 512);
     public static void main(String[] a){
+        System.out.println("START PINGING");
         new pingableHost("easyplay.su",6567).ping();
         new pingableHost("obvilionnetwork.ru",6567).ping();
+        System.out.println("END PINHING");
     }
     public static class pingableHost{
         public String ip;
