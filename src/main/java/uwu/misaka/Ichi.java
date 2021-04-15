@@ -17,11 +17,17 @@ import java.util.ArrayList;
 public class Ichi {
     static final AsyncExecutor executor = new AsyncExecutor(Math.max(Runtime.getRuntime().availableProcessors(), 6));
     static final Prov<DatagramPacket> packetSupplier = () -> new DatagramPacket(new byte[512], 512);
+    
+    public static String hook = "meme";
+    public static String name = "meme";
+    public static String avatar = "meme";
+
     public static void main(String[] a) throws InterruptedException {
         ArrayList<pingableHost> hosts = new ArrayList<>();
-        hosts.add(new pingableHost("easyplay.su",6567));
-        hosts.add(new pingableHost("obvilionnetwork.ru",6567));
+        hosts.add(new pingableHost("obvilionnetwork.ru",7000));
+        hosts.add(new pingableHost("185.13.47.140",1001));
         hosts.add(new pingableHost("shizashizashiza.ml",27736));
+
         while(true){
             Thread.sleep(10000);
             hosts.forEach(h->h.ping());
@@ -37,8 +43,8 @@ public class Ichi {
         public pingableHost(String ip,int p){
             this.ip=ip;
             this.port = p;
-            this.succesMessage = "meme";
-            this.dropMessage = "clown";
+            this.succesMessage = ip+":"+p+" проснулся, можно отдыхать";
+            this.dropMessage = ip+":"+p+" спит,ора будить";
             booted=true;
         }
 
@@ -83,9 +89,9 @@ public class Ichi {
     }
 
     public static void handleDrop(pingableHost h){
-        DiscordWebhook wh = new DiscordWebhook("https://discordapp.com/api/webhooks/831917105841831967/OIEb0orMXNnEant2Zd1lH0OrzYSLnX8_vQljflFqsM-jvLG0Pvv9Iny1BaA8e5Ub3IO7");
-        wh.setUsername(h.ip);
-        wh.setAvatarUrl("https://cdn.discordapp.com/attachments/827594245836767313/827601335306027108/b3bf9ddff91325605e59ea0c480507cd--future-diary-google.jpg");
+        DiscordWebhook wh = new DiscordWebhook(hook);
+        wh.setUsername(name);
+        wh.setAvatarUrl(avatar);
         wh.addEmbed(new DiscordWebhook.EmbedObject()
                 .setTitle(h.dropMessage)
                 .setColor(new Color(110, 237, 139)));
@@ -98,9 +104,9 @@ public class Ichi {
         }
     }
     public static void handleUp(pingableHost h){
-        DiscordWebhook wh = new DiscordWebhook("https://discordapp.com/api/webhooks/831917105841831967/OIEb0orMXNnEant2Zd1lH0OrzYSLnX8_vQljflFqsM-jvLG0Pvv9Iny1BaA8e5Ub3IO7");
-        wh.setUsername(h.ip);
-        wh.setAvatarUrl("https://cdn.discordapp.com/attachments/827594245836767313/827601335306027108/b3bf9ddff91325605e59ea0c480507cd--future-diary-google.jpg");
+        DiscordWebhook wh = new DiscordWebhook(hook);
+        wh.setUsername(name);
+        wh.setAvatarUrl(avatar);
         wh.addEmbed(new DiscordWebhook.EmbedObject()
                 .setTitle(h.succesMessage)
                 .setColor(new Color(110, 237, 139)));
